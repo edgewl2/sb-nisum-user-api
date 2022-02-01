@@ -1,6 +1,6 @@
 package dev.edgeahz.userapi.config;
 
-import dev.edgeahz.userapi.security.filter.JwtTokenFilter;
+import dev.edgeahz.userapi.security.filter.JwtAuthorizationFilter;
 import dev.edgeahz.userapi.service.UserDetailsSecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -51,7 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // No session will be created or used by spring security
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-        http.addFilterBefore(new JwtTokenFilter(this.userDetailsSecurityService), UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(new JwtAuthorizationFilter(this.userDetailsSecurityService), UsernamePasswordAuthenticationFilter.class);
     }
 
     @Bean
