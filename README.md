@@ -22,7 +22,7 @@ Para la ejecución del proyecto se requiere como mínimo:
 - [Visual Studio Code](https://code.visualstudio.com/download) - Visual Studio Code es un editor de código fuente multiplataforma desarrollado por Microsoft. (Puede usarse también cualquier IDE tales como IntelliJ IDEA, Eclipse, etc...).
 
 ## Documentacion del API
-Puede [descargar](https://www.getpostman.com/collections/fd43523b6af49ed596ee) e importar la colección de Postman para usar debidamente la API o utilizar Swagger el cual viene integrado al projecto.
+Puede [descargar](https://www.getpostman.com/collections/fd43523b6af49ed596ee) e importar la colección de Postman para usar debidamente la API o utilizar Swagger el cual viene integrado al proyecto.
 
 ## Instalación
 
