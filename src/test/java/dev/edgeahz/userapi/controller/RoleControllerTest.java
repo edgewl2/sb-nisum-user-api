@@ -127,7 +127,7 @@ class RoleControllerTest {
         role.setName(getDummyRequest().getName());
         role.setDescription(getDummyRequest().getDescription());
         role.setCreated(new Date());
-        role.setModified(new Date());
+        role.setModified(role.getCreated());
         role.setCreatedBy("anonymous");
         role.setModifiedBy("anonymous");
         return Optional.of(role);

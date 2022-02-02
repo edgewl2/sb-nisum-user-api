@@ -46,8 +46,8 @@ public class HandlerController {
                         this.getMessage("unauth.error"), e.getMessage(), e));
     }
 
-    @ExceptionHandler(JwtAttemptAuthenticationException.class)
-    public ResponseEntity<ResponseApi<Object>> handleJwtAttemptAuthentication(JwtAttemptAuthenticationException e) {
+    @ExceptionHandler(AttemptAuthenticationException.class)
+    public ResponseEntity<ResponseApi<Object>> handleJwtAttemptAuthentication(AttemptAuthenticationException e) {
         return ResponseEntity.status(e.getStatus())
                 .body(this.buildResponse(
                         this.getMessage("unexp.error"),

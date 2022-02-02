@@ -4,7 +4,7 @@ import dev.edgeahz.userapi.domain.dto.UserDto;
 import dev.edgeahz.userapi.domain.entity.Phone;
 import dev.edgeahz.userapi.domain.entity.Role;
 import dev.edgeahz.userapi.domain.entity.User;
-import dev.edgeahz.userapi.exception.JwtAttemptAuthenticationException;
+import dev.edgeahz.userapi.exception.AttemptAuthenticationException;
 import dev.edgeahz.userapi.exception.UserApiActionException;
 import dev.edgeahz.userapi.repository.PhoneRepository;
 import dev.edgeahz.userapi.repository.RoleRepository;
@@ -56,6 +56,10 @@ public class UserServiceImpl implements UserService {
         Optional<User> userSaved = Optional.empty();
         Optional<User> userExists = this.userRepository.findByEmail(userDto.getEmail());
 
+        userExists.ifPresent(action -> {
+            throw new UserApiActionException("user.found", HttpStatus.FORBIDDEN);
+        });
+
         if(!userDto.getPhones().isEmpty()){
             List<Optional<Phone>> phoneOptionals = userDto.getPhones().stream()
                     .map(phone -> this.phoneRepository.findByNumber(phone.getNumber()))
@@ -67,10 +71,6 @@ public class UserServiceImpl implements UserService {
                     )
             );
         }
-
-        userExists.ifPresent(action -> {
-            throw new UserApiActionException("user.found", HttpStatus.FORBIDDEN);
-        });
 
         Optional<Role> role = this.roleRepository.findByName(RoleType.ROLE_NORMAL.name());
         if (role.isPresent()) {
@@ -87,7 +87,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<User> search(String email) {
-        return Optional.empty();
+        User user = this.userRepository.findByEmail(email).orElseThrow(() ->
+                new UserApiActionException("user.not.found", HttpStatus.NOT_FOUND));
+
+        return Optional.of(user);
     }
 
     @Transactional
@@ -105,7 +108,7 @@ public class UserServiceImpl implements UserService {
                 userOptional.get().setActive(true);
                 this.userRepository.save(userOptional.get());
             } catch (AuthenticationException e){
-                throw new JwtAttemptAuthenticationException("user.signin.failed", e, HttpStatus.UNAUTHORIZED);
+                throw new AttemptAuthenticationException("user.signin.failed", e, HttpStatus.UNAUTHORIZED);
             }
         }
         return token;
