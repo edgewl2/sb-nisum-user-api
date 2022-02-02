@@ -31,7 +31,7 @@ Con anterioridad conviene haber instalado los elementos requidos ya mencionados,
 Clone el repositorio.
 
 ```bash
-git clone git@github.com:luchonetvv/user-api.git
+git clone git@github.com:edgewl2/sb-nisum-user-api.git
 git status
 ```
 
