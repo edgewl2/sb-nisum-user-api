@@ -26,7 +26,7 @@ Puede [descargar](https://www.getpostman.com/collections/fd43523b6af49ed596ee) e
 
 ## Instalación
 
-Con anterioridad conviene haber instalado los elementos requidos ya mencionados, luego:
+Con anterioridad debe haber instalado los elementos requeridos ya mencionados, luego:
 
 Clone el repositorio.
 
